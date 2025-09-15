@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Performance Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+
+        .card {
+            max-width: 700px;
+            margin: 50px auto;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-custom {
+            background: #0d6efd;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        .result-box {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .high {
+            background: #e9f7ef;
+            color: #155724;
+        }
+
+        .medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .low {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .form-label span {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card p-4">
+            <h3 class="text-center mb-4">📊 Student Performance Predictor</h3>
+            <form method="post">
+
+                <!-- Attendance -->
+                <div class="mb-3">
+                    <label class="form-label">Attendance: <span id="att_val">50</span>%</label>
+                    <input type="range" class="form-range" min="0" max="100" value="50" name="attendance"
+                        id="attendance">
+                </div>
+
+                <!-- Hours Studied -->
+                <div class="mb-3">
+                    <label class="form-label">Hours Studied: <span id="hrs_val">10</span></label>
+                    <input type="range" class="form-range" min="0" max="24" value="10" name="hours_studied"
+                        id="hours_studied">
+                </div>
+
+                <!-- Previous Grade -->
+                <div class="mb-3">
+                    <label class="form-label">Previous Grade: <span id="prev_val">50</span></label>
+                    <input type="range" class="form-range" min="0" max="100" value="50" name="previous_grade"
+                        id="previous_grade">
+                </div>
+
+                <!-- Assignments Completed -->
+                <div class="mb-3">
+                    <label class="form-label">Assignments Completed: <span id="assign_val">5</span></label>
+                    <input type="range" class="form-range" min="0" max="10" value="5" name="assignments_completed"
+                        id="assignments_completed">
+                </div>
+
+                <!-- Extra Curricular -->
+                <div class="mb-3">
+                    <label class="form-label">Extra Curricular</label>
+                    <select class="form-select" name="extra_curricular" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+
+                <!-- Button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-custom">Predict Final Grade</button>
+                </div>
+            </form>
+
+            {% if prediction is not none and gpa is not none %}
+            <div class="result-box text-center
+          {% if gpa >= 3.0 %}high{% elif gpa >= 2.0 %}medium{% else %}low{% endif %}">
+                Predicted Final Grade: {{ prediction }} / 100 <br>
+                GPA (0–4 Scale): {{ gpa }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        // Update slider values live
+        document.getElementById("attendance").oninput = function () {
+            document.getElementById("att_val").innerText = this.value;
+        }
+        document.getElementById("hours_studied").oninput = function () {
+            document.getElementById("hrs_val").innerText = this.value;
+        }
+        document.getElementById("previous_grade").oninput = function () {
+            document.getElementById("prev_val").innerText = this.value;
+        }
+        document.getElementById("assignments_completed").oninput = function () {
+            document.getElementById("assign_val").innerText = this.value;
+        }
+    </script>
+</body>
+
+</html>
