@@ -61,30 +61,31 @@
 
                 <!-- Attendance -->
                 <div class="mb-3">
-                    <label class="form-label">Attendance: <span id="att_val">50</span>%</label>
-                    <input type="range" class="form-range" min="0" max="100" value="50" name="attendance"
-                        id="attendance">
+                    <label class="form-label">Reg No: <span id="att_reg">23/149579</span></label>
+                    <input type="text" class="form-control" value="23/149579" name="regno" id="regno">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Attendance (%): <span id="att_val">50</span></label>
+                    <input type="number" class="form-control" min="0" max="100" value="50" name="attendance" id="attendance">
                 </div>
 
                 <!-- Hours Studied -->
                 <div class="mb-3">
                     <label class="form-label">Hours Studied: <span id="hrs_val">10</span></label>
-                    <input type="range" class="form-range" min="0" max="24" value="10" name="hours_studied"
-                        id="hours_studied">
+                    <input type="number" class="form-control" min="0" max="24" value="10" name="hours_studied" id="hours_studied">
                 </div>
 
                 <!-- Previous Grade -->
                 <div class="mb-3">
                     <label class="form-label">Previous Grade: <span id="prev_val">50</span></label>
-                    <input type="range" class="form-range" min="0" max="100" value="50" name="previous_grade"
-                        id="previous_grade">
+                    <input type="number" class="form-control" min="0" max="100" value="50" name="previous_grade" id="previous_grade">
                 </div>
 
                 <!-- Assignments Completed -->
                 <div class="mb-3">
                     <label class="form-label">Assignments Completed: <span id="assign_val">5</span></label>
-                    <input type="range" class="form-range" min="0" max="10" value="5" name="assignments_completed"
-                        id="assignments_completed">
+                    <input type="number" class="form-control" min="0" max="10" value="5" name="assignments_completed" id="assignments_completed">
                 </div>
 
                 <!-- Extra Curricular -->
@@ -113,7 +114,10 @@
     </div>
 
     <script>
-        // Update slider values live
+        // Update values live
+        document.getElementById("regno").oninput = function () {
+            document.getElementById("att_reg").innerText = this.value;
+        }
         document.getElementById("attendance").oninput = function () {
             document.getElementById("att_val").innerText = this.value;
         }
